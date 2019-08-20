@@ -11,6 +11,7 @@ executors:
     docker:
       - image: circleci/android:api-28
 
+jobs:
   assemble_release:
     executor:
       name: default
