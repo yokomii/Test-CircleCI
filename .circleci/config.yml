@@ -12,6 +12,15 @@ executors:
       - image: circleci/android:api-28
 
 jobs:
+  assemble_debug:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: Build debug APK
+          command: ./gradlew assembleDebug
+
   assemble_release:
     executor:
       name: default
@@ -23,6 +32,11 @@ jobs:
 
 workflows:
   version: 2
+
+  debug:
+    unless: << pipeline.parameters.run_release_build >>
+    jobs:
+      - assemble_debug
 
   release:
     when: << pipeline.parameters.run_release_build >>
