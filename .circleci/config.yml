@@ -32,6 +32,9 @@ jobs:
       - aws-s3/copy:
           from: "s3://test-circleci-keystore/release.gradle"
           to: .
+      - run:
+          name: Build Rlease APK
+          command: ./gradlew assembleRelease
 
 workflows:
   version: 2
