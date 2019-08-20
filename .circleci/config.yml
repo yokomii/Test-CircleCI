@@ -20,9 +20,9 @@ commands:
       - aws-s3/copy:
           from: "s3://test-circleci-keystore/release.gradle"
           to: .
-#      - aws-s3/copy:
-#          from: "s3://test-circleci-keystore/release.keystore"
-#          to: .
+      - aws-s3/copy:
+          from: "s3://test-circleci-keystore/release.keystore"
+          to: .
 
 jobs:
   assemble_debug:
@@ -48,7 +48,7 @@ workflows:
   version: 2
   debug:
     jobs:
-      - assemble_release
+      - assemble_debug
 
   release:
     when: << pipeline.parameters.run_release_build >>

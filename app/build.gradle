@@ -19,7 +19,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (releaseSigningConfigFile.exists()) {
-                logger.quiet('exists')
                 apply from: releaseSigningConfigFile, to: android
                 signingConfig signingConfigs.release
             }
