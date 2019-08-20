@@ -22,12 +22,15 @@ android {
     }
 
     if (releaseSigningConfigFile.exists()) {
+        logger.quiet('exists')
         apply from: releaseSigningConfigFile, to: android
         signingConfigs {
             release {
                 signingConfig signingConfigs.release
             }
         }
+    } else {
+        logger.quiet('unexists')
     }
 }
 

@@ -32,7 +32,6 @@ jobs:
       - aws-s3/copy:
           from: "s3://test-circleci-keystore/release.gradle"
           to: .
-          arguments: --dryrun
 
 workflows:
   version: 2
