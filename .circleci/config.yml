@@ -16,6 +16,7 @@ jobs:
     - executor:
         name: default
     - steps:
+        - checkout
         - run:
             name: Build debug APK
             command: ./gradlew :app:assembleDebug
