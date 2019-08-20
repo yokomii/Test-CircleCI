@@ -7,50 +7,20 @@ parameters:
 
 executors:
   default:
-    working_directory: /tmp/workspace
     docker:
       - image: circleci/android:api-28
-
-orbs:
-  aws-s3: circleci/aws-s3@1.0.11
-
-commands:
-  copy_release_signing_config:
-    steps:
-      - aws-s3/copy:
-          from: "s3://test-circleci-keystore/release.gradle"
-          to: .
-      - aws-s3/copy:
-          from: "s3://test-circleci-keystore/release.keystore"
-          to: .
-
-jobs:
-  assemble_debug:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - run:
-          name: Build debug APK
-          command: ./gradlew assembleDebug
 
   assemble_release:
     executor:
       name: default
     steps:
       - checkout
-      - copy_release_signing_config
       - run:
           name: Build Rlease APK
           command: ./gradlew assembleRelease
 
 workflows:
   version: 2
-
-  debug:
-    unless: << pipeline.parameters.run_release_build >>
-    jobs:
-      - assemble_debug
 
   release:
     when: << pipeline.parameters.run_release_build >>
