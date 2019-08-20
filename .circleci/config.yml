@@ -7,6 +7,7 @@ parameters:
 
 executors:
   default:
+    working_directory: /tmp/workspace
     docker:
       - image: circleci/android:api-28
 
