@@ -17,9 +17,9 @@ jobs:
         name: default
     - steps:
         - checkout
-        - run:
-            name: Build debug APK
-            command: ./gradlew assembleDebug
+#        - run:
+#            name: Build debug APK
+#            command: ./gradlew assembleDebug
 
 workflows:
   version: 2
