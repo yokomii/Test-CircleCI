@@ -14,6 +14,16 @@ executors:
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
 
+commands:
+  copy_release_signing_config:
+    steps:
+      - aws-s3/copy:
+          from: "s3://test-circleci-keystore/release.gradle"
+          to: .
+      - aws-s3/copy:
+          from: "s3://test-circleci-keystore/release.keystore"
+          to: .
+
 jobs:
   assemble_debug:
     executor:
@@ -29,9 +39,7 @@ jobs:
       name: default
     steps:
       - checkout
-      - aws-s3/copy:
-          from: "s3://test-circleci-keystore/release.gradle"
-          to: .
+      - copy_release_signing_config
       - run:
           name: Build Rlease APK
           command: ./gradlew assembleRelease
