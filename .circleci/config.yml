@@ -46,7 +46,9 @@ jobs:
 
 workflows:
   version: 2
+
   debug:
+    unless: << pipeline.parameters.run_release_build >>
     jobs:
       - assemble_debug
 
