@@ -13,16 +13,16 @@ executors:
 
 jobs:
   assemble_debug:
-    - executor:
-        name: default
-    - steps:
-        - checkout
-#        - run:
-#            name: Build debug APK
-#            command: ./gradlew assembleDebug
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: Build debug APK
+          command: ./gradlew assembleDebug
 
 workflows:
   version: 2
-  debug:
+  hoge:
     jobs:
       - assemble_debug
