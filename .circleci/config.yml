@@ -7,23 +7,22 @@ parameters:
 
 executors:
   default:
-    working_directory: /tmp/test_circleci
+    working_directory: /tmp/workspace
     docker:
       - image: circleci/android:api-28
 
 jobs:
-  assemble_staging_debug:
+  assemble_debug:
     - executor:
         name: default
     - steps:
         - checkout
         - run:
             name: Build debug APK
-            command: ./gradlew :app:assembleDebug
+            command: ./gradlew assembleDebug
 
 workflows:
   version: 2
   debug:
     jobs:
-      - assemble_staging_debug
-
+      - assemble_debug
