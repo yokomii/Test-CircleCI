@@ -38,7 +38,7 @@ workflows:
   version: 2
   debug:
     jobs:
-      - assemble_debug
+      - assemble_release
 
   release:
     when: << pipeline.parameters.run_release_build >>
