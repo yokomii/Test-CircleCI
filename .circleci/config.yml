@@ -1,22 +1,27 @@
-version: 2
+version: 2.1
+
+parameters:
+  run_release_build:
+    type: boolean
+    default: false
+
+executors:
+  default:
+    working_directory: /tmp/test_circleci
+    docker:
+      - image: circleci/android:api-28
+
 jobs:
-  one:
-    docker:
-      - image: circleci/android:api-28
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: sleep 25
-  two:
-    docker:
-      - image: circleci/android:api-28
-    steps:
-      - checkout
-      - run: echo "A more familiar hi"
-      - run: sleep 15
+  assemble_staging_debug:
+    - executor:
+        name: default
+    - steps:
+        - run:
+            name: Build debug APK
+            command: ./gradlew :app:assembleDebug
+
 workflows:
   version: 2
-  one_and_two:
+  debug:
     jobs:
-      - one
-      - two
+      - assemble_staging_debug
